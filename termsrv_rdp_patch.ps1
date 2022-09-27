@@ -8,6 +8,8 @@ Stop-Service TermService -Force
 $termsrv_dll_acl = Get-Acl c:\windows\system32\termsrv.dll
 Copy-Item c:\windows\system32\termsrv.dll c:\windows\system32\termsrv.dll.copy
 takeown /f c:\windows\system32\termsrv.dll
+takeown /F c:\Windows\System32\termsrv.dll /A
+icacls c:\Windows\System32\termsrv.dll /grant Administrators:F
 $new_termsrv_dll_owner = (Get-Acl c:\windows\system32\termsrv.dll).owner
 cmd /c "icacls c:\windows\system32\termsrv.dll /Grant $($new_termsrv_dll_owner):F /C"
 # search for a pattern in termsrv.dll file 
